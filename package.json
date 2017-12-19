@@ -1,22 +1,32 @@
 {
-  "name": "honeycomb",
-  "version": "0.0.1",
-  "private": true,
-  "scripts": {
-    "start": "node node_modules/react-native/local-cli/cli.js start",
-    "test": "jest"
-  },
-  "dependencies": {
-    "react": "16.0.0",
-    "react-native": "0.51.0"
-  },
-  "devDependencies": {
-    "babel-jest": "21.2.0",
-    "babel-preset-react-native": "4.0.0",
-    "jest": "21.2.1",
-    "react-test-renderer": "16.0.0"
-  },
-  "jest": {
-    "preset": "react-native"
-  }
+    "name": "honeycomb",
+    "version": "0.0.1",
+    "private": true,
+    "scripts": {
+        "start": "node node_modules/react-native/local-cli/cli.js start",
+        "test": "jest"
+    },
+    "dependencies": {
+        "react": "16.0.0",
+        "react-native": "0.51.0"
+    },
+    "devDependencies": {
+        "babel-cli": "^6.26.0",
+        "babel-jest": "21.2.0",
+        "babel-preset-flow": "^6.23.0",
+        "babel-preset-react-native": "4.0.0",
+        "esdoc": "^1.0.4",
+        "esdoc-ecmascript-proposal-plugin": "^1.0.0",
+        "esdoc-flow-plugin": "^1.0.0",
+        "esdoc-jsx-plugin": "^1.0.0",
+        "esdoc-lint-plugin": "^1.0.1",
+        "esdoc-react-plugin": "^1.0.1",
+        "esdoc-standard-plugin": "^1.0.0",
+        "flow-bin": "^0.57.0",
+        "jest": "21.2.1",
+        "react-test-renderer": "16.0.0"
+    },
+    "jest": {
+        "preset": "react-native"
+    }
 }

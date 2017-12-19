@@ -1,4 +1,4 @@
-package com.honeycomb;
+package com.zurasta.honeycomb;
 
 import android.app.Application;
 
