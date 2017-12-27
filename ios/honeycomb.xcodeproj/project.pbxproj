@@ -37,6 +37,9 @@
 		8BACF2BDA79BBAA25DFB0943 /* Pods_honeycomb.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 9A628FA2C807108C1EB294A3 /* Pods_honeycomb.framework */; };
 		ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */ = {isa = PBXBuildFile; fileRef = ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */; };
 		D7DF0633306E6CE2A18C1B0B /* Pods_honeycombTests.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = C2CAACD98078FBF3F31201BD /* Pods_honeycombTests.framework */; };
+		FAE57ACA1FF3D48700DB45F0 /* Mapbox.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE57AA61FF3D48700DB45F0 /* Mapbox.framework */; };
+		FAE57ACB1FF3D48700DB45F0 /* Mapbox.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = FAE57AA61FF3D48700DB45F0 /* Mapbox.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
+		FAE57AD31FF3D4ED00DB45F0 /* libRCTMGL.a in Frameworks */ = {isa = PBXBuildFile; fileRef = FAE57AD21FF3D4B900DB45F0 /* libRCTMGL.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -299,7 +302,28 @@
 			remoteGlobalIDString = 9936F32F1F5F2E5B0010BF04;
 			remoteInfo = "privatedata-tvOS";
 		};
+		FAE57AD11FF3D4B900DB45F0 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = FAE57ACD1FF3D4B900DB45F0 /* RCTMGL.xcodeproj */;
+			proxyType = 2;
+			remoteGlobalIDString = C4D1443D1F4E16F600396F26;
+			remoteInfo = RCTMGL;
+		};
 /* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		FAE57ACC1FF3D48800DB45F0 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				FAE57ACB1FF3D48700DB45F0 /* Mapbox.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
 		008F07F21AC5B25A0029DE68 /* main.jsbundle */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text; path = main.jsbundle; sourceTree = "<group>"; };
@@ -332,6 +356,8 @@
 		ADBDB91F1DFEBF0600ED6528 /* RCTBlob.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTBlob.xcodeproj; path = "../node_modules/react-native/Libraries/Blob/RCTBlob.xcodeproj"; sourceTree = "<group>"; };
 		C2CAACD98078FBF3F31201BD /* Pods_honeycombTests.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_honeycombTests.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		EE08DD95615805AFA5CC897B /* Pods-honeycomb.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-honeycomb.debug.xcconfig"; path = "Pods/Target Support Files/Pods-honeycomb/Pods-honeycomb.debug.xcconfig"; sourceTree = "<group>"; };
+		FAE57AA61FF3D48700DB45F0 /* Mapbox.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Mapbox.framework; path = "../node_modules/@mapbox/react-native-mapbox-gl/ios/Mapbox.framework"; sourceTree = "<group>"; };
+		FAE57ACD1FF3D4B900DB45F0 /* RCTMGL.xcodeproj */ = {isa = PBXFileReference; lastKnownFileType = "wrapper.pb-project"; name = RCTMGL.xcodeproj; path = "../node_modules/@mapbox/react-native-mapbox-gl/ios/RCTMGL.xcodeproj"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -348,6 +374,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				FAE57AD31FF3D4ED00DB45F0 /* libRCTMGL.a in Frameworks */,
 				ADBDB9381DFEBF1600ED6528 /* libRCTBlob.a in Frameworks */,
 				5E9157361DD0AC6A00FF2AA8 /* libRCTAnimation.a in Frameworks */,
 				146834051AC3E58100842450 /* libReact.a in Frameworks */,
@@ -362,6 +389,7 @@
 				00C302EA1ABCBA2D00DB3ED1 /* libRCTVibration.a in Frameworks */,
 				139FDEF61B0652A700C62182 /* libRCTWebSocket.a in Frameworks */,
 				8BACF2BDA79BBAA25DFB0943 /* Pods_honeycomb.framework in Frameworks */,
+				FAE57ACA1FF3D48700DB45F0 /* Mapbox.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -535,6 +563,7 @@
 		832341AE1AAA6A7D00B99B32 /* Libraries */ = {
 			isa = PBXGroup;
 			children = (
+				FAE57ACD1FF3D4B900DB45F0 /* RCTMGL.xcodeproj */,
 				5E91572D1DD0AC6500FF2AA8 /* RCTAnimation.xcodeproj */,
 				146833FF1AC3E56700842450 /* React.xcodeproj */,
 				00C302A71ABCB8CE00DB3ED1 /* RCTActionSheet.xcodeproj */,
@@ -563,6 +592,7 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				FAE57AA61FF3D48700DB45F0 /* Mapbox.framework */,
 				13B07FAE1A68108700A75B9A /* honeycomb */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
 				00E356EF1AD99517003FC87E /* honeycombTests */,
@@ -591,6 +621,14 @@
 			children = (
 				ADBDB9271DFEBF0700ED6528 /* libRCTBlob.a */,
 				F3695B7F1FE683DC00F17A40 /* libRCTBlob-tvOS.a */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		FAE57ACE1FF3D4B900DB45F0 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				FAE57AD21FF3D4B900DB45F0 /* libRCTMGL.a */,
 			);
 			name = Products;
 			sourceTree = "<group>";
@@ -639,6 +677,8 @@
 				00DD1BFF1BD5951E006B06BC /* Bundle React Native code and images */,
 				5C2EFA6954DFC56E04B9D13A /* [CP] Embed Pods Frameworks */,
 				AA36DEE86C03094B7E0A232F /* [CP] Copy Pods Resources */,
+				FAE57ACC1FF3D48800DB45F0 /* Embed Frameworks */,
+				FAE57AD41FF3D5A800DB45F0 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -744,6 +784,10 @@
 				{
 					ProductGroup = 78C398B11ACF4ADC00677621 /* Products */;
 					ProjectRef = 78C398B01ACF4ADC00677621 /* RCTLinking.xcodeproj */;
+				},
+				{
+					ProductGroup = FAE57ACE1FF3D4B900DB45F0 /* Products */;
+					ProjectRef = FAE57ACD1FF3D4B900DB45F0 /* RCTMGL.xcodeproj */;
 				},
 				{
 					ProductGroup = 00C302D41ABCB9D200DB3ED1 /* Products */;
@@ -1026,6 +1070,13 @@
 			remoteRef = F3695BD21FE6AE0400F17A40 /* PBXContainerItemProxy */;
 			sourceTree = BUILT_PRODUCTS_DIR;
 		};
+		FAE57AD21FF3D4B900DB45F0 /* libRCTMGL.a */ = {
+			isa = PBXReferenceProxy;
+			fileType = archive.ar;
+			path = libRCTMGL.a;
+			remoteRef = FAE57AD11FF3D4B900DB45F0 /* PBXContainerItemProxy */;
+			sourceTree = BUILT_PRODUCTS_DIR;
+		};
 /* End PBXReferenceProxy section */
 
 /* Begin PBXResourcesBuildPhase section */
@@ -1187,6 +1238,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-honeycombTests/Pods-honeycombTests-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
+		FAE57AD41FF3D5A800DB45F0 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = " \"${BUILT_PRODUCTS_DIR}/${FRAMEWORKS_FOLDER_PATH}/Mapbox.framework/strip-frameworks.sh\"";
+		};
 /* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
@@ -1296,6 +1360,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../node_modules/@mapbox/react-native-mapbox-gl/ios";
 				INFOPLIST_FILE = honeycomb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
@@ -1316,6 +1381,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CURRENT_PROJECT_VERSION = 1;
+				FRAMEWORK_SEARCH_PATHS = "$(PROJECT_DIR)/../node_modules/@mapbox/react-native-mapbox-gl/ios";
 				INFOPLIST_FILE = honeycomb/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				OTHER_LDFLAGS = (
