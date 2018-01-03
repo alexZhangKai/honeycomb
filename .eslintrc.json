@@ -1,8 +1,10 @@
 {
+    "parser": "babel-eslint",
     "env": {
         "es6": true,
         "node": true,
-        "react-native/react-native": true
+        "react-native/react-native": true,
+        "jest": true
     },
     "parserOptions": {
         "ecmaFeatures": {
@@ -18,7 +20,8 @@
     "rules": {
         "indent": [
             "error",
-            4
+            4,
+            { "MemberExpression": 0 }
         ],
         "linebreak-style": [
             "error",
@@ -218,7 +221,6 @@
         "react/jsx-no-undef": "error",
         "react/jsx-one-expression-per-line": "error",
         "react/jsx-pascal-case": "error",
-        "react/jsx-space-before-closing": "error",
         "react/jsx-tag-spacing": ["error", { "closingSlash": "never", "afterOpening": "never", "beforeSelfClosing": "always" }],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
