@@ -1,0 +1,34 @@
+{
+    "source": "./src",
+    "destination": "./docs",
+    "index": "README.md",
+    "plugins": [
+        {
+            "name": "esdoc-standard-plugin",
+            "option": {
+                "lint": { "enable": false },
+                "coverage": { "enable": true },
+                "accessor": {
+                "access": ["public", "protected", "private"],
+                "autoPrivate" : false
+            },
+                "undocumentIdentifier" : { "enable": false },
+                "typeInference": { "enable": true }
+            }
+        },
+        { "name": "esdoc-ecmascript-proposal-plugin", "option": { "all": true } },
+        { "name": "esdoc-flow-plugin" },
+        {
+            "name": "esdoc-jsx-plugin",
+            "option": {"enable": true}
+        },
+        {
+            "name": "esdoc-react-plugin",
+            "option": {"enable": true}
+        },
+        {
+            "name": "esdoc-lint-plugin",
+            "option": {"enable": true}
+        }
+    ]
+}
