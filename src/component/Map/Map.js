@@ -2,8 +2,11 @@
 
 import React, { Component } from 'react';
 import {
-    Button
+    View
 } from 'react-native';
+import {
+    Icon
+} from 'react-native-elements';
 
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 import Canvas from 'react-native-canvas';
@@ -18,14 +21,13 @@ type Props = {
 };
 
 type State = {
-    usrLoc: Array<number>,
+    usrLoc: Array<number>
 };
 
 export default class Map extends Component<Props, State> {
     constructor(){
         super();
-        this.handleMapPressed = this.handleMapPressed.bind(this);
-        this.handleButtonPressed = this.handleButtonPressed.bind(this);
+        this.handleFlyTo = this.handleFlyTo.bind(this);
         this.state = { usrLoc: [0, 0] };
     }
 
@@ -43,39 +45,31 @@ export default class Map extends Component<Props, State> {
     }
 
     locationUpdate(location: Object){
-        this.setState({ usrLoc: [location.coords.longitude, location.coords.latitude] });
-        // this._canvas = (canvas) => {
-        //     const ctx = canvas.getContext('2d');
-        //     ctx.fillStyle = 'purple';
-        //     const loc = [location.coords.latitude, location.coords.longitude];
-        //     this._map.getPointInView(loc).then((data) => {
-        //         ctx.fillRect(data[0],data[1]);
-        //     });
-        //     // ctx.fillRect(0, 0, 50, 50);
-        // };
+        this.setState({
+            usrLoc: [location.coords.longitude, location.coords.latitude]
+        });
     }
 
-    async handleMapPressed(){
-        // this._map.getVisibleBounds().then((data) => {
-        //     const boundOne = [data[0][1], data[0][0]];
-        //     const pointInView = await this._map.getPointInView(boundOne);
-        // });
-        const bounds = await this._map.getVisibleBounds();
-        const boundOne = [bounds[0][1], bounds[0][0]];
-        const pointInView = await this._map.getPointInView(boundOne);
-        console.log(pointInView);
+    // Change view to current user location
+    handleFlyTo(){
+        this._map.flyTo(this.state.usrLoc);
     }
 
-    handleButtonPressed(){
-        console.log(this.state.usrLoc);
-    }
+    _canvas = this.createCanvas.bind(this);
 
-    _canvas = (canvas) => {
+    createCanvas(canvas){
         const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'purple';
-        // ctx.fillRect(0, 0, 100, 100);
-        ctx.arc(50, 50, 49, 0, Math.PI * 2, true);
-        ctx.fill();
+        const height = 500;
+        const width = 600;
+        canvas.height = height;
+        canvas.width = width;
+
+        async function draw(){
+            const usrLocInView = await this._map.getPointInView(this.state.usrLoc);
+            ctx.clearRect(0, 0, height, width);
+            ctx.strokeRect(usrLocInView[0] - 25, usrLocInView[1] - 25, 50, 50);
+        }
+        setInterval(draw.bind(this), 10);
     }
 
     render(){
@@ -85,15 +79,21 @@ export default class Map extends Component<Props, State> {
                 zoomLevel={15}
                 style={styles.map}
                 showUserLocation={true}
+                pitchEnable={false}
+                rotateEnable={false}
                 ref={(map) => (this._map = map)}
                 id={'map'}
                 onPress={this.handleMapPressed}
             >
-                <Button
-                    style={styles.button}
-                    onPress={this.handleButtonPressed}
-                    title={'z'}
-                />
+                <View
+                    style={styles.locate}
+                >
+                    <Icon
+                        name={'ios-locate-outline'}
+                        type={'ionicon'}
+                        onPress={this.handleFlyTo}
+                    />
+                </View>
                 <Canvas
                     ref={this._canvas}
                 />

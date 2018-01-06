@@ -9,12 +9,11 @@ export default StyleSheet.create({
         bottom: 0,
         zIndex: -1
     },
-    button: {
+    locate: {
         position: 'absolute',
-        width: 50,
-        height: 50,
-        bottom: 10,
-        left: 10,
-        zIndex: 1
+        bottom: 25,
+        left: 0,
+        width: 30,
+        height: 30
     }
 });
