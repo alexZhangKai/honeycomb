@@ -9,6 +9,11 @@ import {
 import styles from '../config/styles';
 
 export default class Drawer extends Component<{}> {
+    constructor(){
+        super();
+        this.handleButtonPressed = this.handleButtonPressed.bind(this);
+    }
+
     toggleDrawer = () => {
         this.props.navigator.toggleDrawer({
             side: 'left'
