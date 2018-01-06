@@ -1,0 +1,8 @@
+{
+    "javascript.validate.enable": false,
+    "flow.useNPMPackagedFlow": true,
+    "flow.pathToFlow": "${workspaceRoot}/node_modules/.bin/flow",
+    "eslint.options": { "configFile": ".eslintrc.json" },
+    "eslint.nodePath": "${workspaceRoot}/node_modules/eslint"
+
+}

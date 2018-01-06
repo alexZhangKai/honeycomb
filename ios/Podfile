@@ -8,6 +8,8 @@ target 'honeycomb' do
     # Pods for honeycomb
 
 
+    pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
     target 'honeycombTests' do
         inherit! :search_paths
         # Pods for testing
