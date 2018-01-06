@@ -1,4 +1,4 @@
-// flow
+// @flow
 
 import { Navigation } from 'react-native-navigation';
 
