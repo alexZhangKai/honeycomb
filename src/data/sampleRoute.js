@@ -1,5 +1,7 @@
-{
+export default {
+    type: 'Feature',
     geometry: {
+        type: 'LineString',
         coordinates: [
             [
                 144.968268,
@@ -33,7 +35,6 @@
                 144.953581,
                 -37.817993
             ]
-        ],
-        type: "LineString"
+        ]
     }
-}
+};

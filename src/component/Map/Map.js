@@ -9,10 +9,10 @@ import {
 } from 'react-native-elements';
 
 import Mapbox from '@mapbox/react-native-mapbox-gl';
-import Canvas from 'react-native-canvas';
 
 import { accessToken } from '../../config/settings';
 import styles from './styles';
+import sampleRoute from '../../data/sampleRoute';
 
 Mapbox.setAccessToken(accessToken);
 
@@ -48,28 +48,12 @@ export default class Map extends Component<Props, State> {
         this.setState({
             usrLoc: [location.coords.longitude, location.coords.latitude]
         });
+        this._route.props.shape.geometry.coordinates[0] = this.state.usrLoc;
     }
 
     // Change view to current user location
     handleFlyTo(){
         this._map.flyTo(this.state.usrLoc);
-    }
-
-    _canvas = this.createCanvas.bind(this);
-
-    createCanvas(canvas){
-        const ctx = canvas.getContext('2d');
-        const height = 500;
-        const width = 600;
-        canvas.height = height;
-        canvas.width = width;
-
-        async function draw(){
-            const usrLocInView = await this._map.getPointInView(this.state.usrLoc);
-            ctx.clearRect(0, 0, height, width);
-            ctx.strokeRect(usrLocInView[0] - 25, usrLocInView[1] - 25, 50, 50);
-        }
-        setInterval(draw.bind(this), 10);
     }
 
     render(){
@@ -85,6 +69,17 @@ export default class Map extends Component<Props, State> {
                 id={'map'}
                 onPress={this.handleMapPressed}
             >
+                <Mapbox.ShapeSource
+                    shape={ sampleRoute }
+                    id={'dataSource'}
+                    ref={(route) => (this._route = route)}
+                >
+                    <Mapbox.LineLayer
+                        style={ mapBoxStyle.line }
+                        id={'line'}
+                        ref={(line) => (this._line = line)}
+                    />
+                </Mapbox.ShapeSource>
                 <View
                     style={styles.locate}
                 >
@@ -94,10 +89,14 @@ export default class Map extends Component<Props, State> {
                         onPress={this.handleFlyTo}
                     />
                 </View>
-                <Canvas
-                    ref={this._canvas}
-                />
             </Mapbox.MapView>
         );
     }
 }
+
+const mapBoxStyle = Mapbox.StyleSheet.create({
+    line: {
+        lineColor: 'blue',
+        lineWidth: 5
+    }
+});
