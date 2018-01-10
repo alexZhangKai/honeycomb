@@ -10,5 +10,10 @@ export default StyleSheet.create({
         width: 300,
         alignItems: 'center',
         justifyContent: 'center'
+    },
+    jobList: {
+        position: 'absolute',
+        top: 10,
+        right: 10
     }
 });
