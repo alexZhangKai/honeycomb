@@ -2,14 +2,17 @@
 
 import React, { Component } from 'react';
 import {
-    Button
+    View
 } from 'react-native';
+import {
+    Icon
+} from 'react-native-elements';
 
 import Mapbox from '@mapbox/react-native-mapbox-gl';
-import Canvas from 'react-native-canvas';
 
 import { accessToken } from '../../config/settings';
 import styles from './styles';
+import sampleRoute from '../../data/sampleRoute';
 
 Mapbox.setAccessToken(accessToken);
 
@@ -18,14 +21,13 @@ type Props = {
 };
 
 type State = {
-    usrLoc: Array<number>,
+    usrLoc: Array<number>
 };
 
 export default class Map extends Component<Props, State> {
     constructor(){
         super();
-        this.handleMapPressed = this.handleMapPressed.bind(this);
-        this.handleButtonPressed = this.handleButtonPressed.bind(this);
+        this.handleFlyTo = this.handleFlyTo.bind(this);
         this.state = { usrLoc: [0, 0] };
     }
 
@@ -43,39 +45,15 @@ export default class Map extends Component<Props, State> {
     }
 
     locationUpdate(location: Object){
-        this.setState({ usrLoc: [location.coords.longitude, location.coords.latitude] });
-        // this._canvas = (canvas) => {
-        //     const ctx = canvas.getContext('2d');
-        //     ctx.fillStyle = 'purple';
-        //     const loc = [location.coords.latitude, location.coords.longitude];
-        //     this._map.getPointInView(loc).then((data) => {
-        //         ctx.fillRect(data[0],data[1]);
-        //     });
-        //     // ctx.fillRect(0, 0, 50, 50);
-        // };
+        this.setState({
+            usrLoc: [location.coords.longitude, location.coords.latitude]
+        });
+        this._route.props.shape.geometry.coordinates[0] = this.state.usrLoc;
     }
 
-    async handleMapPressed(){
-        // this._map.getVisibleBounds().then((data) => {
-        //     const boundOne = [data[0][1], data[0][0]];
-        //     const pointInView = await this._map.getPointInView(boundOne);
-        // });
-        const bounds = await this._map.getVisibleBounds();
-        const boundOne = [bounds[0][1], bounds[0][0]];
-        const pointInView = await this._map.getPointInView(boundOne);
-        console.log(pointInView);
-    }
-
-    handleButtonPressed(){
-        console.log(this.state.usrLoc);
-    }
-
-    _canvas = (canvas) => {
-        const ctx = canvas.getContext('2d');
-        ctx.fillStyle = 'purple';
-        // ctx.fillRect(0, 0, 100, 100);
-        ctx.arc(50, 50, 49, 0, Math.PI * 2, true);
-        ctx.fill();
+    // Change view to current user location
+    handleFlyTo(){
+        this._map.flyTo(this.state.usrLoc);
     }
 
     render(){
@@ -85,19 +63,40 @@ export default class Map extends Component<Props, State> {
                 zoomLevel={15}
                 style={styles.map}
                 showUserLocation={true}
+                pitchEnable={false}
+                rotateEnable={false}
                 ref={(map) => (this._map = map)}
                 id={'map'}
                 onPress={this.handleMapPressed}
             >
-                <Button
-                    style={styles.button}
-                    onPress={this.handleButtonPressed}
-                    title={'z'}
-                />
-                <Canvas
-                    ref={this._canvas}
-                />
+                <Mapbox.ShapeSource
+                    shape={ sampleRoute }
+                    id={'dataSource'}
+                    ref={(route) => (this._route = route)}
+                >
+                    <Mapbox.LineLayer
+                        style={ mapBoxStyle.line }
+                        id={'line'}
+                        ref={(line) => (this._line = line)}
+                    />
+                </Mapbox.ShapeSource>
+                <View
+                    style={styles.locate}
+                >
+                    <Icon
+                        name={'ios-locate-outline'}
+                        type={'ionicon'}
+                        onPress={this.handleFlyTo}
+                    />
+                </View>
             </Mapbox.MapView>
         );
     }
 }
+
+const mapBoxStyle = Mapbox.StyleSheet.create({
+    line: {
+        lineColor: 'blue',
+        lineWidth: 5
+    }
+});
