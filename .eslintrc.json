@@ -15,7 +15,8 @@
     },
     "plugins": [
         "react",
-        "react-native"
+        "react-native",
+        "import"
     ],
     "rules": {
         "indent": [
@@ -69,7 +70,7 @@
 
         "array-callback-return": "error",
         "block-scoped-var": "error",
-        "curly": ["error", "multi"],
+        "curly": ["error", "multi-or-nest"],
         "dot-location": ["error", "property"],
         "eqeqeq": ["error", "always"],
         "no-caller": "error",
@@ -149,7 +150,7 @@
         "no-unneeded-ternary": "error",
         "no-whitespace-before-property": "error",
         "nonblock-statement-body-position": ["error", "beside"],
-        "object-curly-newline": ["error", { "multiline": true }],
+        "object-curly-newline": ["error", { "consistent": true }],
         "object-curly-spacing": ["error", "always"],
         "object-property-newline": ["error", { "allowMultiplePropertiesPerLine": true }],
         "operator-assignment": ["error", "always"],
@@ -158,7 +159,7 @@
         "quote-props": ["error", "as-needed"],
         "semi-spacing": ["error", {"before": false, "after": true}],
         "semi-style": ["error", "last"],
-        "space-before-blocks": ["error", { "functions": "never", "keywords": "always", "classes": "always" }],
+        "space-before-blocks": ["error", { "functions": "always", "keywords": "always", "classes": "always" }],
         "space-before-function-paren": ["error", "never"],
         "space-in-parens": ["error", "never"],
         "space-infix-ops": "error",
@@ -176,7 +177,6 @@
         "no-class-assign": "error",
         "no-const-assign": "error",
         "no-dupe-class-members": "error",
-        "no-duplicate-imports": "error",
         "no-new-symbol": "error",
         "no-this-before-super": "error",
         "no-useless-computed-key": "error",
@@ -221,7 +221,7 @@
         "react/jsx-no-undef": "error",
         "react/jsx-one-expression-per-line": "error",
         "react/jsx-pascal-case": "error",
-        "react/jsx-tag-spacing": ["error", { "closingSlash": "never", "afterOpening": "never", "beforeSelfClosing": "always" }],
+        "react/jsx-tag-spacing": ["error", { "beforeSelfClosing": "always", "closingSlash": "never", "afterOpening": "never", "beforeSelfClosing": "always" }],
         "react/jsx-uses-react": "error",
         "react/jsx-uses-vars": "error",
         "react/jsx-wrap-multilines": ["error", { "declaration": "parens-new-line", "assignment": "parens-new-line", "return": "parens-new-line", "arrow": "parens", "condition": "parens-new-line", "logical": "parens-new-line", "prop": "parens-new-line" }],
@@ -267,6 +267,8 @@
                         "mixins",
                         "statics",
                         "defaultProps",
+                        "type-annotations",
+                        "instance-variables",
                         "constructor",
                         "getDefaultProps",
                         "getInitialState",
@@ -278,7 +280,11 @@
                         "shouldComponentUpdate",
                         "componentWillUpdate",
                         "componentDidUpdate",
-                        "componentWillUnmount"
+                        "componentWillUnmount",
+                        "lifecycle",
+                        "instance-methods",
+                        "everything-else",
+                        "render"
                     ]
                 }
             }
@@ -288,7 +294,9 @@
 
         "react-native/no-unused-styles": "error",
         "react-native/no-inline-styles": "error",
-        "react-native/no-color-literals": "warn"
+        "react-native/no-color-literals": "warn",
+
+        "import/no-duplicates": "error"
     },
     "settings": {
         "flowVersion": "0.57"
