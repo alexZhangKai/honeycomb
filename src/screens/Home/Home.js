@@ -3,8 +3,8 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import Map from '../component/Map';
-import styles from '../config/styles';
+import Map from '../../component/Map';
+import styles from './styles';
 
 export default class Home extends Component<{}> {
     componentDidMount(){

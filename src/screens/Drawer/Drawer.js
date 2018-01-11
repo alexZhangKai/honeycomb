@@ -6,7 +6,7 @@ import {
     Button
 } from 'react-native';
 
-import styles from '../config/styles';
+import styles from './styles';
 
 export default class Drawer extends Component<{}> {
     constructor(){
