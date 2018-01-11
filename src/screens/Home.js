@@ -3,7 +3,7 @@
 import React, { Component } from 'react';
 import { View } from 'react-native';
 
-import Map from '../component/Map/Map';
+import Map from '../component/Map';
 import styles from '../config/styles';
 
 export default class Home extends Component<{}> {

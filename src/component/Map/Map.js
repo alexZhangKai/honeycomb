@@ -11,23 +11,21 @@ import {
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 
 import { accessToken } from '../../config/settings';
-import styles from './styles';
+import {
+    styles,
+    mapboxStyles
+} from './styles';
+import type {
+    Props,
+    State
+} from './types';
 import sampleRoute from '../../data/sampleRoute';
 
 Mapbox.setAccessToken(accessToken);
 
-type Props = {
-
-};
-
-type State = {
-    usrLoc: Array<number>
-};
-
 export default class Map extends Component<Props, State> {
     constructor(){
         super();
-        this.handleFlyTo = this.handleFlyTo.bind(this);
         this.state = { usrLoc: [0, 0] };
     }
 
@@ -45,14 +43,12 @@ export default class Map extends Component<Props, State> {
     }
 
     locationUpdate(location: Object){
-        this.setState({
-            usrLoc: [location.coords.longitude, location.coords.latitude]
-        });
+        this.setState({ usrLoc: [location.coords.longitude, location.coords.latitude] });
         this._route.props.shape.geometry.coordinates[0] = this.state.usrLoc;
     }
 
     // Change view to current user location
-    handleFlyTo(){
+    handleFlyTo = () => {
         this._map.flyTo(this.state.usrLoc);
     }
 
@@ -67,7 +63,6 @@ export default class Map extends Component<Props, State> {
                 rotateEnable={false}
                 ref={(map) => (this._map = map)}
                 id={'map'}
-                onPress={this.handleMapPressed}
             >
                 <Mapbox.ShapeSource
                     shape={ sampleRoute }
@@ -75,9 +70,8 @@ export default class Map extends Component<Props, State> {
                     ref={(route) => (this._route = route)}
                 >
                     <Mapbox.LineLayer
-                        style={ mapBoxStyle.line }
+                        style={ mapboxStyles.line }
                         id={'line'}
-                        ref={(line) => (this._line = line)}
                     />
                 </Mapbox.ShapeSource>
                 <View
@@ -93,10 +87,3 @@ export default class Map extends Component<Props, State> {
         );
     }
 }
-
-const mapBoxStyle = Mapbox.StyleSheet.create({
-    line: {
-        lineColor: 'blue',
-        lineWidth: 5
-    }
-});
