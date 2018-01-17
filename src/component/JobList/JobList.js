@@ -25,7 +25,14 @@ export default class JobList extends Component<{}> {
         });
     }
 
-    success(key){
+    rejectJob(key){
+        const data = this.state.data.filter(item => item.key !== key);
+        this.setState({
+            data: data
+        });
+    }
+
+    acceptJob(key){
         const data = this.state.data.filter(item => item.key !== key);
         this.setState({
             data: data
@@ -38,7 +45,8 @@ export default class JobList extends Component<{}> {
             fee={item.fee}
             size={item.size}
             attr={item.attr}
-            success={this.success.bind(this)}
+            accept={this.acceptJob.bind(this)}
+            reject={this.rejectJob.bind(this)}
             setScrollEnable={(enable) => this.setScrollEnable(enable)}
         />
     )

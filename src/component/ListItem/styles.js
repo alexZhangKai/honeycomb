@@ -9,9 +9,10 @@ export default StyleSheet.create({
     listItem: {
         height: 140,
         marginLeft: -width,
+        marginRight: -width,
         justifyContent: 'center'
     },
-    absoluteCell: {
+    rejectCell: {
         position: 'absolute',
         top: 0,
         bottom: 0,
@@ -22,7 +23,7 @@ export default StyleSheet.create({
         alignItems: 'center',
         backgroundColor: 'red'
     },
-    absoluteCellText: {
+    rejectCellText: {
         margin: 16,
         color: 'white',
         marginRight: 10
@@ -45,5 +46,21 @@ export default StyleSheet.create({
         width: 130,
         marginBottom: 5,
         marginTop: 5
+    },
+    acceptCell: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        width,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: 'green'
+    },
+    acceptCellText: {
+        margin: 16,
+        color: 'white',
+        marginLeft: 10
     }
 });
