@@ -6,7 +6,8 @@ import {
     Text,
     Animated,
     Dimensions,
-    PanResponder
+    PanResponder,
+    Image
 } from 'react-native';
 
 import styles from './styles';
@@ -46,7 +47,7 @@ export default class ItemList extends React.PureComponent<{}> {
                         toValue: { x: width, y: 0 },
                         duration: 500
                     }).start(() => {
-                        this.props.success(this.props.key);
+                        this.props.success(this.props.id);
                         this.setScrollViewEnable(true);
                     });
                 }
@@ -72,12 +73,26 @@ export default class ItemList extends React.PureComponent<{}> {
                     {...this.panResponder.panHandlers}
                 >
                     <View style={styles.absoluteCell}>
-                        <Text>DELETE</Text>
+                        <Text style={styles.absoluteCellText}>REJECT</Text>
                     </View>
                     <View style={styles.innerCell}>
-                        <Text>
-                            {this.props.fee}
-                        </Text>
+                        <View style={styles.info}>
+                            <Text>
+                                {'Fee: ' + this.props.fee}
+                            </Text>
+                            <Text>
+                                {'Size: ' + this.props.size}
+                            </Text>
+                            <Text>
+                                {'Arrti: ' + this.props.attr}
+                            </Text>
+                        </View>
+                        <View>
+                            <Image
+                                style={styles.image}
+                                source={require('../../data/sampleSnapshot.png')}
+                            />
+                        </View>
                     </View>
                 </Animated.View>
             </View>

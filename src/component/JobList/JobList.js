@@ -32,9 +32,9 @@ export default class JobList extends Component<{}> {
         });
     }
 
-    renderItem = ({item}) => (
+    renderItem = ({ item }) => (
         <ListItem
-            key={item.key}
+            id={item.key}
             fee={item.fee}
             size={item.size}
             attr={item.attr}
