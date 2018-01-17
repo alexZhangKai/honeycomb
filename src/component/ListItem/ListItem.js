@@ -46,7 +46,7 @@ export default class ItemList extends React.PureComponent<{}> {
                         toValue: { x: width, y: 0 },
                         duration: 500
                     }).start(() => {
-                        this.props.success(this.props.text);
+                        this.props.success(this.props.key);
                         this.setScrollViewEnable(true);
                     });
                 }
@@ -67,7 +67,8 @@ export default class ItemList extends React.PureComponent<{}> {
     render(){
         return (
             <View style={styles.listItem}>
-                <Animated.View style={[this.state.position.getLayout()]}
+                <Animated.View 
+                    style={[this.state.position.getLayout()]}
                     {...this.panResponder.panHandlers}
                 >
                     <View style={styles.absoluteCell}>
@@ -75,7 +76,7 @@ export default class ItemList extends React.PureComponent<{}> {
                     </View>
                     <View style={styles.innerCell}>
                         <Text>
-                            {this.props.text}
+                            {this.props.fee}
                         </Text>
                     </View>
                 </Animated.View>

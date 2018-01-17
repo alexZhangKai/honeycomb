@@ -34,7 +34,10 @@ export default class JobList extends Component<{}> {
 
     renderItem = ({item}) => (
         <ListItem
-            text={item.key}
+            key={item.key}
+            fee={item.fee}
+            size={item.size}
+            attr={item.attr}
             success={this.success.bind(this)}
             setScrollEnable={(enable) => this.setScrollEnable(enable)}
         />

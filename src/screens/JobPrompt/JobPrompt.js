@@ -3,10 +3,10 @@ import {
     View
 } from 'react-native';
 
-import JobList from '../component/JobList/JobList';
-import styles from '../config/styles';
+import JobList from '../../component/JobList';
+import styles from '../../config/styles';
 
-import data from '../data/sameleJobs';
+import data from '../../data/sampleJobs';
 
 export default class JobPrompt extends Component<{}> {
     componentDidMount(){
@@ -18,9 +18,7 @@ export default class JobPrompt extends Component<{}> {
 
     render(){
         return (
-            <View
-                style={styles.container}
-            >
+            <View style={styles.container}>
                 <JobList data={data} />
             </View>
         );
