@@ -5,9 +5,11 @@ export default StyleSheet.create({
         flex: 1,
         flexDirection: 'column'
     },
-    jobList: {
-        position: 'absolute',
-        top: 20,
-        right: 20
+    buttons: {
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        marginTop: 20,
+        marginLeft: 10,
+        marginRight: 10
     }
 });

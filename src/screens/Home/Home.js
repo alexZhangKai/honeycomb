@@ -12,23 +12,29 @@ import styles from './styles';
 export default class Home extends Component<{}> {
     static navigatorStyle = { navBarHidden: true };
 
-    // Open job list screen
     handleShowJobList(){
         this.props.navigator.showModal({
-            screen: 'JobPromptScreen',
-            title: 'Job List'
+            title: 'Job List',
+            screen: 'JobPromptScreen'
+        });
+    }
+
+    handleShowDrawer(){
+        this.props.navigator.toggleDrawer({
+            side: 'left'
         });
     }
 
     render(){
         return (
             <View style={styles.container}>
-                <View
-                    style={styles.jobList}
-                >
+                <View style={styles.buttons}>
                     <Icon
-                        style={styles.jobList}
                         name={'view-list'}
+                        onPress={this.handleShowDrawer.bind(this)}
+                    />
+                    <Icon
+                        name={'assignment'}
                         onPress={this.handleShowJobList.bind(this)}
                     />
                 </View>
