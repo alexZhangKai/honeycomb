@@ -10,15 +10,10 @@ import Map from '../../component/Map';
 import styles from './styles';
 
 export default class Home extends Component<{}> {
-    componentDidMount(){
-        this.props.navigator.toggleNavBar({
-            to: 'show',
-            animated: false
-        });
-    }
+    static navigatorStyle = { navBarHidden: true };
 
     // Open job list screen
-    handleJobList(){
+    handleShowJobList(){
         this.props.navigator.showModal({
             screen: 'JobPromptScreen',
             title: 'Job List'
@@ -32,8 +27,9 @@ export default class Home extends Component<{}> {
                     style={styles.jobList}
                 >
                     <Icon
+                        style={styles.jobList}
                         name={'view-list'}
-                        onPress={this.handleJobList.bind(this)}
+                        onPress={this.handleShowJobList.bind(this)}
                     />
                 </View>
                 <Map />
