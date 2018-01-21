@@ -6,8 +6,6 @@ import {
 import JobList from '../../component/JobList';
 import styles from '../../config/styles';
 
-import data from '../../data/sampleJobs';
-
 export default class JobPrompt extends Component<{}> {
     componentDidMount(){
         this.props.navigator.setDrawerEnabled({
@@ -19,7 +17,7 @@ export default class JobPrompt extends Component<{}> {
     render(){
         return (
             <View style={styles.container}>
-                <JobList data={data} />
+                <JobList />
             </View>
         );
     }

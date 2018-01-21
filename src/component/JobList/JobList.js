@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import ListItem from '../ListItem/ListItem';
-
+import jobs from '../../db-agent/Job';
 import styles from './styles';
 
 export default class JobList extends Component<{}> {
@@ -15,7 +15,7 @@ export default class JobList extends Component<{}> {
 
         this.state = {
             scrollEnable: true,
-            data: this.props.data
+            data: jobs.getJobList()
         };
     }
 
@@ -26,22 +26,23 @@ export default class JobList extends Component<{}> {
     }
 
     rejectJob(key){
-        const data = this.state.data.filter(item => item.key !== key);
+        jobs.removeJob(key);
         this.setState({
-            data: data
+            data: jobs.getJobList()
         });
     }
 
     acceptJob(key){
-        const data = this.state.data.filter(item => item.key !== key);
+        // const data = this.state.data.filter(item => item.uuid !== key);
+        jobs.removeJob(key);
         this.setState({
-            data: data
+            data: jobs.getJobList()
         });
     }
 
     renderItem = ({ item }) => (
         <ListItem
-            id={item.key}
+            id={item.uuid}
             fee={item.fee}
             size={item.size}
             attr={item.attr}
@@ -51,12 +52,15 @@ export default class JobList extends Component<{}> {
         />
     )
 
+    keyExtractor = (item) => item.uuid
+
     render(){
         return (
             <FlatList
                 data={this.state.data}
                 renderItem={this.renderItem}
                 scrollEnabled={this.state.scrollEnable}
+                keyExtractor={this.keyExtractor}
             />
         );
     }
