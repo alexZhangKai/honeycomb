@@ -7,6 +7,7 @@ import {
 } from 'react-native-elements';
 
 import Map from '../../component/Map';
+import TaskList from '../../component/TaskList';
 import styles from './styles';
 
 export default class Home extends Component<{}> {
@@ -38,6 +39,7 @@ export default class Home extends Component<{}> {
                         onPress={this.handleShowJobList.bind(this)}
                     />
                 </View>
+                <TaskList />
                 <Map />
             </View>
         );
