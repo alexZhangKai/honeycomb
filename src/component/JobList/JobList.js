@@ -6,7 +6,7 @@ import {
 } from 'react-native';
 
 import ListItem from '../ListItem/ListItem';
-
+import jobs from '../../db-agent/Job';
 import styles from './styles';
 
 export default class JobList extends Component<{}> {
@@ -15,7 +15,7 @@ export default class JobList extends Component<{}> {
 
         this.state = {
             scrollEnable: true,
-            data: this.props.data
+            data: jobs.getJobList()
         };
     }
 
@@ -25,20 +25,35 @@ export default class JobList extends Component<{}> {
         });
     }
 
-    success(key){
-        const data = this.state.data.filter(item => item.key !== key);
+    async rejectJob(key){
+        const data = this.state.data.filter(item => item.uuid !== key);
         this.setState({
             data: data
         });
+        await jobs.removeJob(key);
     }
 
-    renderItem = ({item}) => (
+    async acceptJob(key){
+        const data = this.state.data.filter(item => item.uuid !== key);
+        this.setState({
+            data: data
+        });
+        await jobs.removeJob(key);
+    }
+
+    renderItem = ({ item }) => (
         <ListItem
-            text={item.key}
-            success={this.success.bind(this)}
+            id={item.uuid}
+            fee={item.fee}
+            size={item.size}
+            attr={item.attr}
+            accept={this.acceptJob.bind(this)}
+            reject={this.rejectJob.bind(this)}
             setScrollEnable={(enable) => this.setScrollEnable(enable)}
         />
     )
+
+    keyExtractor = (item) => item.uuid
 
     render(){
         return (
@@ -46,6 +61,7 @@ export default class JobList extends Component<{}> {
                 data={this.state.data}
                 renderItem={this.renderItem}
                 scrollEnabled={this.state.scrollEnable}
+                keyExtractor={this.keyExtractor}
             />
         );
     }

@@ -7,30 +7,60 @@ const { width } = Dimensions.get('window');
 
 export default StyleSheet.create({
     listItem: {
-        height: 80,
-        marginLeft: -100,
+        height: 140,
+        marginLeft: -width,
+        marginRight: -width,
         justifyContent: 'center'
     },
-    absoluteCell: {
+    rejectCell: {
         position: 'absolute',
         top: 0,
         bottom: 0,
         left: 0,
-        width: 100,
+        width,
         flexDirection: 'row',
         justifyContent: 'flex-end',
         alignItems: 'center',
         backgroundColor: 'red'
     },
-    absoluteCellText: {
+    rejectCellText: {
         margin: 16,
-        color: 'white'
+        color: 'white',
+        marginRight: 10
     },
     innerCell: {
         width,
-        height: 80,
-        marginLeft: 100,
-        justifyContent: 'center',
-        alignItems: 'center'
+        height: 140,
+        marginLeft: width,
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+        borderBottomWidth: 0.5,
+        borderColor: 'grey'
+    },
+    info: {
+        alignItems: 'center',
+        margin: 10
+    },
+    image: {
+        height: 130,
+        width: 130,
+        marginBottom: 5,
+        marginTop: 5
+    },
+    acceptCell: {
+        position: 'absolute',
+        top: 0,
+        bottom: 0,
+        right: 0,
+        width,
+        flexDirection: 'row',
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: 'green'
+    },
+    acceptCellText: {
+        margin: 16,
+        color: 'white',
+        marginLeft: 10
     }
 });
