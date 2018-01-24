@@ -25,19 +25,20 @@ export default class JobList extends Component<{}> {
         });
     }
 
-    rejectJob(key){
-        jobs.removeJob(key);
+    async rejectJob(key){
+        const data = this.state.data.filter(item => item.uuid !== key);
         this.setState({
-            data: jobs.getJobList()
+            data: data
         });
+        await jobs.removeJob(key);
     }
 
-    acceptJob(key){
-        // const data = this.state.data.filter(item => item.uuid !== key);
-        jobs.removeJob(key);
+    async acceptJob(key){
+        const data = this.state.data.filter(item => item.uuid !== key);
         this.setState({
-            data: jobs.getJobList()
+            data: data
         });
+        await jobs.removeJob(key);
     }
 
     renderItem = ({ item }) => (
