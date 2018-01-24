@@ -14,8 +14,28 @@ import styles from './styles';
 
 const { width } = Dimensions.get('window');
 
-export default class ItemList extends React.PureComponent<{}> {
-    constructor(props){
+type Props = {
+    id: string,
+    fee: number,
+    size: number,
+    attr: Array<string>,
+    accept: (string) => Promise<void>,
+    reject: (string) => Promise<void>,
+    setScrollEnable: (boolean) => void
+}
+
+type State = {
+    position: Animated.ValueXY
+}
+
+export default class ItemList extends React.PureComponent<Props, State> {
+    gestureDelay: number;
+
+    scrollViewEnable: boolean;
+
+    panResponder: PanResponder;
+
+    constructor(props: Props) {
         super(props);
 
         this.gestureDelay = 35;
@@ -52,7 +72,8 @@ export default class ItemList extends React.PureComponent<{}> {
                         this.props.reject(this.props.id);
                         this.setScrollViewEnable(true);
                     });
-                } else {
+                }
+                else {
                     Animated.timing(this.state.position, {
                         toValue: { x: -width, y: 0 },
                         duration: 500
@@ -68,33 +89,32 @@ export default class ItemList extends React.PureComponent<{}> {
         this.state = { position };
     }
 
-    setScrollViewEnable(enable){
+    setScrollViewEnable(enable: boolean) {
         if (this.scrollViewEnable !== enable) {
             this.props.setScrollEnable(enable);
             this.scrollViewEnable = enable;
         }
     }
 
-    render(){
+    render() {
         return (
             <View style={styles.listItem}>
-                <Animated.View 
+                <Animated.View
                     style={[this.state.position.getLayout()]}
                     {...this.panResponder.panHandlers}
                 >
                     <View style={styles.rejectCell}>
-                        <Text style={styles.rejectCellText}>REJECT</Text>
+                        <Text style={styles.rejectCellText}>
+                            REJECT
+                        </Text>
                     </View>
                     <View style={styles.innerCell}>
                         <View style={styles.info}>
                             <Text>
-                                {'Fee: ' + this.props.fee}
+                                {`Fee: ${this.props.fee}`}
                             </Text>
                             <Text>
-                                {'Size: ' + this.props.size}
-                            </Text>
-                            <Text>
-                                {'Arrti: ' + this.props.attr}
+                                {`Size: ${this.props.size}`}
                             </Text>
                         </View>
                         <View>
@@ -105,7 +125,9 @@ export default class ItemList extends React.PureComponent<{}> {
                         </View>
                     </View>
                     <View style={styles.acceptCell}>
-                        <Text style={styles.acceptCellText}>ACCEPT</Text>
+                        <Text style={styles.acceptCellText}>
+                            ACCEPT
+                        </Text>
                     </View>
                 </Animated.View>
             </View>

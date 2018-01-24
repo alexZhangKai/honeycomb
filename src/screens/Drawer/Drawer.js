@@ -8,30 +8,32 @@ import {
 
 import styles from './styles';
 
-export default class Drawer extends Component<{}> {
-    constructor(){
-        super();
-        this.handleButtonPressed = this.handleButtonPressed.bind(this);
-    }
+type Props = {
+    navigator: Object
+}
 
-    toggleDrawer = () => {
+type State = {
+}
+
+export default class Drawer extends Component<Props, State> {
+    toggleDrawer() {
         this.props.navigator.toggleDrawer({
             side: 'left'
         });
-    };
+    }
 
-    handleButtonPressed(){
+    handleButtonPressed() {
         this.toggleDrawer();
     }
 
-    render(){
+    render() {
         return (
             <View
                 style={styles.drawer}
             >
                 <Button
                     title={'Home'}
-                    onPress={this.handleButtonPressed}
+                    onPress={this.handleButtonPressed.bind(this)}
                 />
             </View>
         );

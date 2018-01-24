@@ -8,58 +8,76 @@ import {
 import ListItem from '../ListItem/ListItem';
 import jobs from '../../db-agent/Job';
 import styles from './styles';
+import type
+{
+    Job
+} from './types';
 
-export default class JobList extends Component<{}> {
-    constructor(props){
-        super(props);
+type Props = {
 
+}
+
+type State = {
+    scrollEnable: boolean,
+    data: Array<Job>
+}
+
+export default class JobList extends Component<Props, State> {
+    constructor() {
+        super();
         this.state = {
             scrollEnable: true,
             data: jobs.getJobList()
         };
     }
 
-    setScrollEnable(scrollEnable){
+    keyExtractor = (item: Job) => item.uuid
+
+    setScrollEnable(scrollEnable: boolean) {
         this.setState({
-            scrollEnable: scrollEnable
+            scrollEnable
         });
     }
 
-    async rejectJob(key){
-        const data = this.state.data.filter(item => item.uuid !== key);
-        this.setState({
-            data: data
-        });
-        await jobs.removeJob(key);
-    }
-
-    async acceptJob(key){
-        const data = this.state.data.filter(item => item.uuid !== key);
-        this.setState({
-            data: data
+    async rejectJob(key: string) {
+        this.setState((preState) => {
+            const data = preState.data.filter((item) => item.uuid !== key);
+            return {
+                data
+            };
         });
         await jobs.removeJob(key);
     }
 
-    renderItem = ({ item }) => (
-        <ListItem
-            id={item.uuid}
-            fee={item.fee}
-            size={item.size}
-            attr={item.attr}
-            accept={this.acceptJob.bind(this)}
-            reject={this.rejectJob.bind(this)}
-            setScrollEnable={(enable) => this.setScrollEnable(enable)}
-        />
-    )
+    async acceptJob(key: string) {
+        this.setState((preState) => {
+            const data = preState.data.filter((item) => item.uuid !== key);
+            return {
+                data
+            };
+        });
+        await jobs.removeJob(key);
+    }
 
-    keyExtractor = (item) => item.uuid
+    renderItem({ item }) {
+        return (
+            <ListItem
+                id={item.uuid}
+                fee={item.fee}
+                size={item.size}
+                attr={item.attr}
+                accept={this.acceptJob.bind(this)}
+                reject={this.rejectJob.bind(this)}
+                setScrollEnable={(enable) => this.setScrollEnable(enable)}
+            />
+        );
+    }
 
-    render(){
+    render() {
         return (
             <FlatList
                 data={this.state.data}
-                renderItem={this.renderItem}
+                renderItem={this.renderItem.bind(this)}
                 scrollEnabled={this.state.scrollEnable}
                 keyExtractor={this.keyExtractor}
             />

@@ -1,7 +1,9 @@
+// @flow
+
 import db from '../config/models';
 
 class JobData {
-    static getJobList(){
+    static getJobList() {
         let jobs = db.objects('Job');
 
         // load sample data if list is empty
@@ -15,16 +17,14 @@ class JobData {
             jobs = db.objects('Job');
         }
 
-        return jobs.map((j) => {
-            return {
-                uuid: j.uuid,
-                fee: j.fee,
-                size: j.size
-            };
-        });
+        return jobs.map((j) => ({
+            uuid: j.uuid,
+            fee: j.fee,
+            size: j.size
+        }));
     }
 
-    static removeJob(uuid){
+    static removeJob(uuid) {
         db.write(() => {
             const delJob = db.objectForPrimaryKey('Job', uuid);
             db.delete(delJob);

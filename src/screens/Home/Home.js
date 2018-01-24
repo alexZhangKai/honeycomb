@@ -9,23 +9,30 @@ import {
 import Map from '../../component/Map';
 import styles from './styles';
 
-export default class Home extends Component<{}> {
+type Props = {
+    navigator: Object
+}
+
+type State = {
+}
+
+export default class Home extends Component<Props, State> {
     static navigatorStyle = { navBarHidden: true };
 
-    handleShowJobList(){
+    handleShowJobList() {
         this.props.navigator.showModal({
             title: 'Job List',
             screen: 'JobPromptScreen'
         });
     }
 
-    handleShowDrawer(){
+    handleShowDrawer() {
         this.props.navigator.toggleDrawer({
             side: 'left'
         });
     }
 
-    render(){
+    render() {
         return (
             <View style={styles.container}>
                 <View style={styles.buttons}>
