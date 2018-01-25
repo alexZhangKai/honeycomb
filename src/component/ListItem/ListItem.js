@@ -11,22 +11,12 @@ import {
 } from 'react-native';
 
 import styles from './styles';
+import type {
+    Props,
+    State
+} from './types';
 
 const { width } = Dimensions.get('window');
-
-type Props = {
-    id: string,
-    fee: number,
-    size: number,
-    attr: Array<string>,
-    accept: (string) => Promise<void>,
-    reject: (string) => Promise<void>,
-    setScrollEnable: (boolean) => void
-}
-
-type State = {
-    position: Animated.ValueXY
-}
 
 export default class ItemList extends React.PureComponent<Props, State> {
     gestureDelay: number;

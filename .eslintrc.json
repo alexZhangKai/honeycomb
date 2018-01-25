@@ -307,15 +307,15 @@
         "flowtype/no-primitive-constructor-types": "error",
         "flowtype/no-weak-types": ["error", {
            "any": false,
-           "Object": false,
+           "Object": true,
            "Function": true
        }],
        "flowtype/object-type-delimiter": ["error", "comma"],
        "flowtype/require-valid-file-annotation": ["warn", "always", { "annotationStyle": "line" }],
        "flowtype/semi": ["error", "never"],
        "flowtype/space-after-type-colon": ["error", "always", { "allowLineBreak": false }],
-       "flowtype/space-before-generic-bracket": ["error", "never"],
        "flowtype/space-before-type-colon": ["error", "never"],
+       "flowtype/space-before-generic-bracket": ["error", "never"],
        "flowtype/union-intersection-spacing": ["error", "always"],
        "flowtype/use-flow-type": "error"
     },

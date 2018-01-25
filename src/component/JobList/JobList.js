@@ -5,26 +5,19 @@ import {
     FlatList
 } from 'react-native';
 
-import ListItem from '../ListItem/ListItem';
+import ListItem from '../ListItem';
 import jobs from '../../db-agent/Job';
+
 import styles from './styles';
-import type
-{
-    Job
+import type {
+    Job,
+    Props,
+    State
 } from './types';
 
-type Props = {
-
-}
-
-type State = {
-    scrollEnable: boolean,
-    data: Array<Job>
-}
-
 export default class JobList extends Component<Props, State> {
-    constructor() {
-        super();
+    constructor(props: Props) {
+        super(props);
         this.state = {
             scrollEnable: true,
             data: jobs.getJobList()
@@ -59,7 +52,7 @@ export default class JobList extends Component<Props, State> {
         await jobs.removeJob(key);
     }
 
-    renderItem({ item }) {
+    renderItem({ item }: { item: Job }) {
         return (
             <ListItem
                 id={item.uuid}

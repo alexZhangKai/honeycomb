@@ -15,24 +15,21 @@ import {
     styles,
     mapboxStyles
 } from './styles';
+import type {
+    Props,
+    State
+} from './types';
 
 import sampleRoute from '../../data/sampleRoute';
 
 Mapbox.setAccessToken(accessToken);
 
-type Props = {
-}
-
-type State = {
-    usrLoc: Array<number>
-}
-
 export default class Map extends Component<Props, State> {
     watchID: number;
 
-    _map: ?Object;
+    _map: ?Mapbox.MapView;
 
-    _route: ?Object;
+    _route: ?Mapbox.ShapeSource;
 
     constructor() {
         super();
@@ -53,8 +50,13 @@ export default class Map extends Component<Props, State> {
     }
 
     locationUpdate(location: Object) {
-        this.setState({ usrLoc: [location.coords.longitude, location.coords.latitude] });
-        if (this._route != null) this._route.props.shape.geometry.coordinates[0] = this.state.usrLoc;
+        this.setState(() => {
+            const newLoc = [location.coords.longitude, location.coords.latitude];
+            if (this._route != null) this._route.props.shape.geometry.coordinates[0] = newLoc;
+            return {
+                usrLoc: newLoc
+            };
+        });
     }
 
     handleFlyTo() {

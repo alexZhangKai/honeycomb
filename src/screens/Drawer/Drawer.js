@@ -7,13 +7,10 @@ import {
 } from 'react-native';
 
 import styles from './styles';
-
-type Props = {
-    navigator: Object
-}
-
-type State = {
-}
+import type {
+    Props,
+    State
+} from './types';
 
 export default class Drawer extends Component<Props, State> {
     toggleDrawer() {

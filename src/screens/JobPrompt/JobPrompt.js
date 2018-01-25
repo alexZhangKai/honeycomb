@@ -7,13 +7,10 @@ import {
 
 import JobList from '../../component/JobList';
 import styles from '../../config/styles';
-
-type Props = {
-    navigator: Object
-}
-
-type State = {
-}
+import type {
+    Props,
+    State
+} from './types';
 
 export default class JobPrompt extends Component<Props, State> {
     static navigatorButtons = {

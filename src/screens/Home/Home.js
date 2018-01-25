@@ -8,13 +8,10 @@ import {
 
 import Map from '../../component/Map';
 import styles from './styles';
-
-type Props = {
-    navigator: Object
-}
-
-type State = {
-}
+import type {
+    Props,
+    State
+} from './types';
 
 export default class Home extends Component<Props, State> {
     static navigatorStyle = { navBarHidden: true };
