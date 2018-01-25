@@ -11,27 +11,32 @@ import {
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 
 import { accessToken } from '../../config/settings';
-import styles from './styles';
+import {
+    styles,
+    mapboxStyles
+} from './styles';
+import type {
+    Props,
+    State
+} from './types';
+
 import sampleRoute from '../../data/sampleRoute';
 
 Mapbox.setAccessToken(accessToken);
 
-type Props = {
-
-};
-
-type State = {
-    usrLoc: Array<number>
-};
-
 export default class Map extends Component<Props, State> {
-    constructor(){
+    watchID: number;
+
+    _map: ?Mapbox.MapView;
+
+    _route: ?Mapbox.ShapeSource;
+
+    constructor() {
         super();
-        this.handleFlyTo = this.handleFlyTo.bind(this);
         this.state = { usrLoc: [0, 0] };
     }
 
-    componentDidMount(){
+    componentDidMount() {
         navigator.geolocation.requestAuthorization();
         this.watchID = navigator.geolocation.watchPosition(
             (location) => this.locationUpdate(location),
@@ -40,23 +45,25 @@ export default class Map extends Component<Props, State> {
         );
     }
 
-    componentWillUnmount(){
+    componentWillUnmount() {
         navigator.geolocation.clearWatch(this.watchID);
     }
 
-    locationUpdate(location: Object){
-        this.setState({
-            usrLoc: [location.coords.longitude, location.coords.latitude]
+    locationUpdate(location: Object) {
+        this.setState(() => {
+            const newLoc = [location.coords.longitude, location.coords.latitude];
+            if (this._route != null) this._route.props.shape.geometry.coordinates[0] = newLoc;
+            return {
+                usrLoc: newLoc
+            };
         });
-        this._route.props.shape.geometry.coordinates[0] = this.state.usrLoc;
     }
 
-    // Change view to current user location
-    handleFlyTo(){
-        this._map.flyTo(this.state.usrLoc);
+    handleFlyTo() {
+        if (this._map != null) this._map.flyTo(this.state.usrLoc);
     }
 
-    render(){
+    render() {
         return (
             <Mapbox.MapView
                 styleURL={Mapbox.StyleURL.Street}
@@ -67,17 +74,15 @@ export default class Map extends Component<Props, State> {
                 rotateEnable={false}
                 ref={(map) => (this._map = map)}
                 id={'map'}
-                onPress={this.handleMapPressed}
             >
                 <Mapbox.ShapeSource
-                    shape={ sampleRoute }
+                    shape={sampleRoute}
                     id={'dataSource'}
                     ref={(route) => (this._route = route)}
                 >
                     <Mapbox.LineLayer
-                        style={ mapBoxStyle.line }
+                        style={mapboxStyles.line}
                         id={'line'}
-                        ref={(line) => (this._line = line)}
                     />
                 </Mapbox.ShapeSource>
                 <View
@@ -86,17 +91,10 @@ export default class Map extends Component<Props, State> {
                     <Icon
                         name={'ios-locate-outline'}
                         type={'ionicon'}
-                        onPress={this.handleFlyTo}
+                        onPress={this.handleFlyTo.bind(this)}
                     />
                 </View>
             </Mapbox.MapView>
         );
     }
 }
-
-const mapBoxStyle = Mapbox.StyleSheet.create({
-    line: {
-        lineColor: 'blue',
-        lineWidth: 5
-    }
-});

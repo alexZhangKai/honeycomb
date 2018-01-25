@@ -6,32 +6,31 @@ import {
     Button
 } from 'react-native';
 
-import styles from '../config/styles';
+import styles from './styles';
+import type {
+    Props,
+    State
+} from './types';
 
-export default class Drawer extends Component<{}> {
-    constructor(){
-        super();
-        this.handleButtonPressed = this.handleButtonPressed.bind(this);
-    }
-
-    toggleDrawer = () => {
+export default class Drawer extends Component<Props, State> {
+    toggleDrawer() {
         this.props.navigator.toggleDrawer({
             side: 'left'
         });
-    };
+    }
 
-    handleButtonPressed(){
+    handleButtonPressed() {
         this.toggleDrawer();
     }
 
-    render(){
+    render() {
         return (
             <View
                 style={styles.drawer}
             >
                 <Button
                     title={'Home'}
-                    onPress={this.handleButtonPressed}
+                    onPress={this.handleButtonPressed.bind(this)}
                 />
             </View>
         );

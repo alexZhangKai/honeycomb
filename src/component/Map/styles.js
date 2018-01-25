@@ -1,6 +1,9 @@
-import { StyleSheet } from 'react-native';
+// @flow
 
-export default StyleSheet.create({
+import { StyleSheet } from 'react-native';
+import Mapbox from '@mapbox/react-native-mapbox-gl';
+
+export const styles = StyleSheet.create({
     map: {
         position: 'absolute',
         top: 0,
@@ -15,5 +18,12 @@ export default StyleSheet.create({
         left: 0,
         width: 30,
         height: 30
+    }
+});
+
+export const mapboxStyles = Mapbox.StyleSheet.create({
+    line: {
+        lineColor: 'blue',
+        lineWidth: 5
     }
 });
