@@ -4,7 +4,6 @@ import React, { Component } from 'react';
 import {
     View,
     Text,
-    FlatList,
     Animated
 } from 'react-native';
 import {
@@ -13,9 +12,13 @@ import {
 } from 'react-native-elements';
 
 import styles from './styles';
+import type {
+    Props,
+    State
+} from './types';
 
-export default class TaskList extends Component <{}> {
-    constructor(){
+export default class TaskList extends Component <Props, State> {
+    constructor() {
         super();
         const position = new Animated.ValueXY();
         this.state = {
@@ -24,32 +27,37 @@ export default class TaskList extends Component <{}> {
         };
     }
 
-    handleToggleTaskList(){
-        if(this.state.toggle) {
+    handleToggleTaskList() {
+        if (this.state.toggle) {
             Animated.timing(this.state.position, {
                 toValue: { x: 0, y: 200 },
                 duration: 500
             }).start(() => {
-                this.state.toggle = false;
+                this.setState((prevState) => ({
+                    toggle: !prevState.toggle
+                }));
             });
-        } else {
+        }
+        else {
             Animated.timing(this.state.position, {
                 toValue: { x: 0, y: 0 },
                 duration: 500
             }).start(() => {
-                this.state.toggle = true;
+                this.setState((prevState) => ({
+                    toggle: !prevState.toggle
+                }));
             });
         }
     }
 
-    render(){
+    render() {
         return (
             <Animated.View style={[styles.container, this.state.position.getLayout()]}>
                 <View style={styles.headline}>
                     <Text>
                         {'Current Task'}
                     </Text>
-                    <Icon 
+                    <Icon
                         name={'keyboard-arrow-up'}
                         onPress={this.handleToggleTaskList.bind(this)}
                     />

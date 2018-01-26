@@ -1,3 +1,5 @@
+// @flow
+
 export default {
     type: 'Feature',
     geometry: {

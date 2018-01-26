@@ -1,3 +1,5 @@
+// @flow
+
 import { StyleSheet } from 'react-native';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 
