@@ -44,8 +44,8 @@ export default class Home extends Component<Props, State> {
                     />
                 </View>
                 <View style={styles.togglableContainer}>
-                    <Map style={styles.map} />
-                    <TaskList style={styles.taskList} />
+                    <Map />
+                    <TaskList />
                 </View>
             </View>
         );
