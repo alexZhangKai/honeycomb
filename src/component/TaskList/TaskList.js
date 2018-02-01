@@ -18,20 +18,19 @@ import type {
 } from './types';
 
 export default class TaskList extends Component <Props, State> {
-    constructor() {
-        super();
-        const position = new Animated.ValueXY();
+    constructor(props: Props) {
+        super(props);
         this.state = {
-            position,
+            flex: new Animated.Value(0.2),
             toggle: true
         };
     }
 
     handleToggleTaskList() {
         if (this.state.toggle) {
-            Animated.timing(this.state.position, {
-                toValue: { x: 0, y: 200 },
-                duration: 500
+            Animated.timing(this.state.flex, {
+                toValue: 1,
+                duration: 100
             }).start(() => {
                 this.setState((prevState) => ({
                     toggle: !prevState.toggle
@@ -39,9 +38,9 @@ export default class TaskList extends Component <Props, State> {
             });
         }
         else {
-            Animated.timing(this.state.position, {
-                toValue: { x: 0, y: 0 },
-                duration: 500
+            Animated.timing(this.state.flex, {
+                toValue: 0.2,
+                duration: 100
             }).start(() => {
                 this.setState((prevState) => ({
                     toggle: !prevState.toggle
@@ -52,7 +51,14 @@ export default class TaskList extends Component <Props, State> {
 
     render() {
         return (
-            <Animated.View style={[styles.container, this.state.position.getLayout()]}>
+            <Animated.View
+                style={[
+                    styles.container,
+                    {
+                        flex: this.state.flex
+                    }
+                ]}
+            >
                 <View style={styles.headline}>
                     <Text>
                         {'Current Task'}

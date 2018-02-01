@@ -43,8 +43,10 @@ export default class Home extends Component<Props, State> {
                         onPress={this.handleShowJobList.bind(this)}
                     />
                 </View>
-                <TaskList />
-                <Map />
+                <View style={styles.togglableContainer}>
+                    <Map style={styles.map} />
+                    <TaskList style={styles.taskList} />
+                </View>
             </View>
         );
     }

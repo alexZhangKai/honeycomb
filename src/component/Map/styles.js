@@ -4,6 +4,9 @@ import { StyleSheet } from 'react-native';
 import Mapbox from '@mapbox/react-native-mapbox-gl';
 
 export const styles = StyleSheet.create({
+    container: {
+        flex: 1
+    },
     map: {
         position: 'absolute',
         top: 0,

@@ -7,6 +7,6 @@ export type Props = {
 }
 
 export type State = {
-    position: Animated.ValueXY,
+    flex: Animated.Value,
     toggle: boolean
 }

@@ -2,7 +2,8 @@
 
 import React, { Component } from 'react';
 import {
-    View
+    View,
+    Animated
 } from 'react-native';
 import {
     Icon
@@ -65,36 +66,38 @@ export default class Map extends Component<Props, State> {
 
     render() {
         return (
-            <Mapbox.MapView
-                styleURL={Mapbox.StyleURL.Street}
-                zoomLevel={15}
-                style={styles.map}
-                showUserLocation={true}
-                pitchEnable={false}
-                rotateEnable={false}
-                ref={(map) => (this._map = map)}
-                id={'map'}
-            >
-                <Mapbox.ShapeSource
-                    shape={sampleRoute}
-                    id={'dataSource'}
-                    ref={(route) => (this._route = route)}
+            <Animated.View style={styles.container}>
+                <Mapbox.MapView
+                    styleURL={Mapbox.StyleURL.Street}
+                    zoomLevel={15}
+                    style={styles.map}
+                    showUserLocation={true}
+                    pitchEnable={false}
+                    rotateEnable={false}
+                    ref={(map) => (this._map = map)}
+                    id={'map'}
                 >
-                    <Mapbox.LineLayer
-                        style={mapboxStyles.line}
-                        id={'line'}
-                    />
-                </Mapbox.ShapeSource>
-                <View
-                    style={styles.locate}
-                >
-                    <Icon
-                        name={'ios-locate-outline'}
-                        type={'ionicon'}
-                        onPress={this.handleFlyTo.bind(this)}
-                    />
-                </View>
-            </Mapbox.MapView>
+                    <Mapbox.ShapeSource
+                        shape={sampleRoute}
+                        id={'dataSource'}
+                        ref={(route) => (this._route = route)}
+                    >
+                        <Mapbox.LineLayer
+                            style={mapboxStyles.line}
+                            id={'line'}
+                        />
+                    </Mapbox.ShapeSource>
+                    <View
+                        style={styles.locate}
+                    >
+                        <Icon
+                            name={'ios-locate-outline'}
+                            type={'ionicon'}
+                            onPress={this.handleFlyTo.bind(this)}
+                        />
+                    </View>
+                </Mapbox.MapView>
+            </Animated.View>
         );
     }
 }
