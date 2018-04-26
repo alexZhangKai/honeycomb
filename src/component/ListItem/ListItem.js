@@ -37,7 +37,7 @@ export default class ItemList extends React.PureComponent<Props, State> {
             onMoveShouldSetPanResponder: (evt, gestureState) => true,
             onPanResponderTerminationRequest: (evt, gestureState) => false,
             onPanResponderMove: (evt, gestureState) => {
-                if (Math.abs(gestureState.dx) > this.gestureDelay) {
+                if (gestureState.dx < 0 && Math.abs(gestureState.dx) > this.gestureDelay) {
                     this.setScrollViewEnable(false);
                     let newX = 0;
                     if (gestureState.dx > 0) newX = gestureState.dx - this.gestureDelay;
@@ -46,7 +46,7 @@ export default class ItemList extends React.PureComponent<Props, State> {
                 }
             },
             onPanResponderRelease: (evt, gestureState) => {
-                if (Math.abs(gestureState.dx) < 150) {
+                if (gestureState.dx > -150 && gestureState.dx < 0) {
                     Animated.timing(this.state.position, {
                         toValue: { x: 0, y: 0 },
                         duration: 500
@@ -54,16 +54,7 @@ export default class ItemList extends React.PureComponent<Props, State> {
                         this.setScrollViewEnable(true);
                     });
                 }
-                else if (gestureState.dx > 0) {
-                    Animated.timing(this.state.position, {
-                        toValue: { x: width, y: 0 },
-                        duration: 500
-                    }).start(() => {
-                        this.props.reject(this.props.id);
-                        this.setScrollViewEnable(true);
-                    });
-                }
-                else {
+                else if (gestureState.dx < -150) {
                     Animated.timing(this.state.position, {
                         toValue: { x: -width, y: 0 },
                         duration: 500
@@ -93,11 +84,6 @@ export default class ItemList extends React.PureComponent<Props, State> {
                     style={[this.state.position.getLayout()]}
                     {...this.panResponder.panHandlers}
                 >
-                    <View style={styles.rejectCell}>
-                        <Text style={styles.rejectCellText}>
-                            REJECT
-                        </Text>
-                    </View>
                     <View style={styles.innerCell}>
                         <View style={styles.info}>
                             <Text>

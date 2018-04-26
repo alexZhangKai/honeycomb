@@ -14,22 +14,6 @@ export default StyleSheet.create({
         marginRight: -width,
         justifyContent: 'center'
     },
-    rejectCell: {
-        position: 'absolute',
-        top: 0,
-        bottom: 0,
-        left: 0,
-        width,
-        flexDirection: 'row',
-        justifyContent: 'flex-end',
-        alignItems: 'center',
-        backgroundColor: 'red'
-    },
-    rejectCellText: {
-        margin: 16,
-        color: 'white',
-        marginRight: 10
-    },
     innerCell: {
         width,
         height: 140,
